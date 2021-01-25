@@ -1,0 +1,16 @@
+<resources>
+   //main activity
+    <string name="app_name">EZFlash</string>
+    <string name="button_addition">ADD</string>
+    <string name="button_subtraction">SUBTRACT</string>
+    <string name="button_multiply">MULTIPLY</string>
+    <string name="button_division">DIVIDE</string>
+    <string name="button_aboutapp">ABOUT</string>
+    //add activity
+    <string name="button_A">A</string>
+    <string name="button_B">B</string>
+    <string name="button_C">C</string>
+    <string name="button_D">D</string>
+
+
+</resources>

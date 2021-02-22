@@ -38,33 +38,31 @@ public class MulitplyingActivity extends AppCompatActivity {
         showProblem.setText(multiplyStuff[problemCount]);
 
 
-        answerA = (Button) findViewById(R.id.answerA);
+        answerA = findViewById(R.id.answerA);
         answerA.setOnClickListener(v -> {
             nextProblem();//dont touch
             checkbuttons(multiplyStuff);
             checkA(multiplyStuff, number);
         });
-        answerB = (Button) findViewById(R.id.answerB);
+        answerB = findViewById(R.id.answerB);
         answerB.setOnClickListener(v -> {
             nextProblem();//dont touch
             checkbuttons(multiplyStuff);
             checkB(multiplyStuff, number2);
         });
-        answerC = (Button) findViewById(R.id.answerC);
+        answerC = findViewById(R.id.answerC);
         answerC.setOnClickListener(v -> {
             nextProblem();//dont touch
             checkbuttons(multiplyStuff);
             checkC(multiplyStuff, number3);
         });
-        answerD = (Button) findViewById(R.id.answerD);
+        answerD = findViewById(R.id.answerD);
         answerD.setOnClickListener(v -> {
             nextProblem();//dont touch
             checkbuttons(multiplyStuff);
             checkD(multiplyStuff, number4);
         });
         checkbuttons(multiplyStuff);
-        System.out.println(isCorrect);
-
     }
 
 
@@ -74,7 +72,6 @@ public class MulitplyingActivity extends AppCompatActivity {
             showProblem.setText(multiplyStuff[problemCount]);
 
         } catch (ArrayIndexOutOfBoundsException e) {
-
             Toast toast = Toast.makeText(this, isCorrect + " out of 10 correct, Great job!", Toast.LENGTH_LONG);//before activity finishes,toast message displays
             toast.show();
             System.out.println(isCorrect);

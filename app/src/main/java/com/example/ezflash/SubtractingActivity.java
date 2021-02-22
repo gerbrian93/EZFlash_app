@@ -4,13 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 public class SubtractingActivity extends AppCompatActivity {
@@ -42,30 +38,38 @@ public class SubtractingActivity extends AppCompatActivity {
 
         answerA = (Button) findViewById(R.id.answerA);
         answerA.setOnClickListener(v -> {
+            toast();
+            checkA(subtractStuff, number);
             nextProblem();//dont touch
             checkbuttons(subtractStuff);
-            checkA(subtractStuff, number);
+
         });
         answerB = (Button) findViewById(R.id.answerB);
         answerB.setOnClickListener(v -> {
+            toast();
+            checkB(subtractStuff, number2);
             nextProblem();//dont touch
             checkbuttons(subtractStuff);
-            checkB(subtractStuff, number2);
+
         });
         answerC = (Button) findViewById(R.id.answerC);
         answerC.setOnClickListener(v -> {
+            toast();
+            checkC(subtractStuff, number3);
             nextProblem();//dont touch
             checkbuttons(subtractStuff);
-            checkC(subtractStuff, number3);
+
         });
         answerD = (Button) findViewById(R.id.answerD);
         answerD.setOnClickListener(v -> {
+            toast();
+            checkD(subtractStuff, number4);
             nextProblem();//dont touch
             checkbuttons(subtractStuff);
-            checkD(subtractStuff, number4);
+
         });
         checkbuttons(subtractStuff);
-        System.out.println(isCorrect);
+
 
     }
 
@@ -77,8 +81,7 @@ public class SubtractingActivity extends AppCompatActivity {
 
         } catch (ArrayIndexOutOfBoundsException e) {
 
-            Toast toast = Toast.makeText(this, isCorrect + " out of 10 correct, Great job!", Toast.LENGTH_LONG);//before activity finishes,toast message displays
-            toast.show();
+
             System.out.println(isCorrect);
             finish();
         }
@@ -173,6 +176,12 @@ public class SubtractingActivity extends AppCompatActivity {
         }
     }
 
+    public void toast() {
+        if (problemCount > 0) {
+            Toast toast = Toast.makeText(this, isCorrect + " out of 10 correct, Great job!", Toast.LENGTH_SHORT);//before activity finishes,toast message displays
+            toast.show();
+        }
+    }
 
 
 

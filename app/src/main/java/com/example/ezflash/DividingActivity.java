@@ -40,9 +40,10 @@ public class DividingActivity extends AppCompatActivity {
 
         answerA = (Button) findViewById(R.id.answerA);
         answerA.setOnClickListener(v -> {
+            checkA(divideStuff, number);
             nextProblem();//dont touch
             checkbuttons(divideStuff);
-            checkA(divideStuff, number);
+
         });
         answerB = (Button) findViewById(R.id.answerB);
         answerB.setOnClickListener(v -> {

@@ -44,47 +44,49 @@ public class AddingActivity extends AppCompatActivity {
         showProblem.setText(addingStuff[problemCount]);
 
 
-         answerA = (Button) findViewById(R.id.answerA);
+         answerA = findViewById(R.id.answerA);
         answerA.setOnClickListener(v -> {
-            nextProblem();//dont touch
-            checkbuttons(addingStuff);
             checkA(addingStuff, number);
+            nextProblem();//dont touch
+            checkbuttons(addingStuff);
         });
-         answerB = (Button) findViewById(R.id.answerB);
+         answerB = findViewById(R.id.answerB);
         answerB.setOnClickListener(v -> {
-            nextProblem();//dont touch
-            checkbuttons(addingStuff);
             checkB(addingStuff, number2);
+            nextProblem();//dont touch
+            checkbuttons(addingStuff);
         });
-         answerC = (Button) findViewById(R.id.answerC);
+         answerC = findViewById(R.id.answerC);
         answerC.setOnClickListener(v -> {
-            nextProblem();//dont touch
-            checkbuttons(addingStuff);
             checkC(addingStuff, number3);
-        });
-         answerD = (Button) findViewById(R.id.answerD);
-        answerD.setOnClickListener(v -> {
             nextProblem();//dont touch
             checkbuttons(addingStuff);
+        });
+         answerD = findViewById(R.id.answerD);
+        answerD.setOnClickListener(v -> {
             checkD(addingStuff, number4);
+            nextProblem();//dont touch
+            checkbuttons(addingStuff);
+
         });
         checkbuttons(addingStuff);
-        System.out.println(isCorrect);
+
 
     }
 
 
     public void nextProblem() {//this method calls finish when the adding stuff array goes out of bounds
         problemCount++;
+        Toast toast = Toast.makeText(this, isCorrect + " out of 10 correct, Great job!", Toast.LENGTH_LONG);//before activity finishes,toast message displays
         try {
             showProblem.setText(addingStuff[problemCount]);
 
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException a) {
 
-                Toast toast = Toast.makeText(this, isCorrect + " out of 10 correct, Great job!", Toast.LENGTH_LONG);//before activity finishes,toast message displays
-                toast.show();
-                System.out.println(isCorrect);
-               // finish();
+            toast.show();
+            System.out.println("0");
+
+            finish();
         }
         }
 
@@ -118,7 +120,7 @@ public class AddingActivity extends AppCompatActivity {
                 answerD.setText(Integer.toString(number4));
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-
+            System.out.println("1");
         }
 
 
@@ -133,7 +135,7 @@ public class AddingActivity extends AppCompatActivity {
           if (total == number)
               isCorrect++;
       } catch (ArrayIndexOutOfBoundsException e) {
-
+          System.out.println("2");
       }
     }
 
@@ -147,7 +149,7 @@ public class AddingActivity extends AppCompatActivity {
                if (total == number2)
                    isCorrect++;
            } catch (ArrayIndexOutOfBoundsException e) {
-
+               System.out.println("3");
            }
         }
                 public void checkC(String[] addingStuff, int number3) {
@@ -160,7 +162,7 @@ public class AddingActivity extends AppCompatActivity {
                        if (total == number3)
                            isCorrect++;
                    } catch (ArrayIndexOutOfBoundsException e) {
-
+                       System.out.println("4");
                    }
                 }
                         public void checkD(String[] addingStuff, int number4) {
@@ -173,7 +175,7 @@ public class AddingActivity extends AppCompatActivity {
                                if (total == number4)
                                    isCorrect++;
                            } catch (ArrayIndexOutOfBoundsException e)  {
-
+                                    System.out.println("5");
                            }
                         }
 

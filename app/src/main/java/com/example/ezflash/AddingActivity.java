@@ -1,12 +1,5 @@
 package com.example.ezflash;
-/*
-This activity successfully runs through the problems presented in the array, with a use of a single
-variable it goes through all 10 problems upon user selection and presents a toast message upon
-finishing when the index of the addingStuff array goes out of bounds.
-tasks:
--create counter to show user what number out of 10 problems they're on.
--introduce variability with buttons and problem sets
- */
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -77,13 +70,13 @@ public class AddingActivity extends AppCompatActivity {
 
     public void nextProblem() {//this method calls finish when the adding stuff array goes out of bounds
         problemCount++;
-        Toast toast = Toast.makeText(this, isCorrect + " out of 10 correct, Great job!", Toast.LENGTH_LONG);//before activity finishes,toast message displays
+
         try {
             showProblem.setText(addingStuff[problemCount]);
 
         } catch (ArrayIndexOutOfBoundsException a) {
 
-            toast.show();
+
             System.out.println("0");
 
             finish();
@@ -91,20 +84,29 @@ public class AddingActivity extends AppCompatActivity {
         }
 
 
-    @SuppressLint("SetTextI18n")
-    public void checkbuttons(String[] addingStuff) {
+
+    public int value(String[] addingStuff) {
         try {
             String[] split = addingStuff[problemCount].split("\\+");
             int num1 = Integer.parseInt(split[0]);
             int num2 = Integer.parseInt(split[1]);
-            int total = num1 + num2;
+            return num1 + num2;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Toast toast = Toast.makeText(this, isCorrect + " out of 10 correct, Great job!", Toast.LENGTH_SHORT);//before activity finishes,toast message displaystoast.show();
+            toast.show();
+            return 0;
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void checkbuttons(String[] addingStuff) {
 
             do {
                 number = random.nextInt((14) + 1);
                 number2 = random.nextInt((14) + 1);
                 number3 = random.nextInt((14) + 1);
                 number4 = random.nextInt((14) + 1);
-            } while (number != total && number2 != total && number3 != total && number4 != total);
+            } while (number != value(addingStuff) && number2 != value(addingStuff) && number3 != value(addingStuff) && number4 != value(addingStuff));
 
             if(number == number2 || number == number3 || number == number4) {
                 checkbuttons(addingStuff);
@@ -119,64 +121,23 @@ public class AddingActivity extends AppCompatActivity {
                 answerC.setText(Integer.toString(number3));
                 answerD.setText(Integer.toString(number4));
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("1");
-        }
-
-
     }
+
     public void checkA(String[] addingStuff, int number) {
-      try {
-          String[] split = addingStuff[problemCount].split("\\+");
-          int num1 = Integer.parseInt(split[0]);
-          int num2 = Integer.parseInt(split[1]);
-          int total = num1 + num2;
-
-          if (total == number)
+        if (value(addingStuff) == number)
               isCorrect++;
-      } catch (ArrayIndexOutOfBoundsException e) {
-          System.out.println("2");
-      }
     }
-
          public void checkB(String[] addingStuff, int number2) {
-           try {
-               String[] split = addingStuff[problemCount].split("\\+");
-               int num1 = Integer.parseInt(split[0]);
-               int num2 = Integer.parseInt(split[1]);
-               int total = num1 + num2;
-
-               if (total == number2)
+            if (value(addingStuff) == number2)
                    isCorrect++;
-           } catch (ArrayIndexOutOfBoundsException e) {
-               System.out.println("3");
-           }
-        }
+         }
                 public void checkC(String[] addingStuff, int number3) {
-                   try {
-                       String[] split = addingStuff[problemCount].split("\\+");
-                       int num1 = Integer.parseInt(split[0]);
-                       int num2 = Integer.parseInt(split[1]);
-                       int total = num1 + num2;
-
-                       if (total == number3)
+                    if (value(addingStuff) == number3)
                            isCorrect++;
-                   } catch (ArrayIndexOutOfBoundsException e) {
-                       System.out.println("4");
-                   }
                 }
                         public void checkD(String[] addingStuff, int number4) {
-                           try {
-                               String[] split = addingStuff[problemCount].split("\\+");
-                               int num1 = Integer.parseInt(split[0]);
-                               int num2 = Integer.parseInt(split[1]);
-                               int total = num1 + num2;
-
-                               if (total == number4)
+                            if (value(addingStuff) == number4)
                                    isCorrect++;
-                           } catch (ArrayIndexOutOfBoundsException e)  {
-                                    System.out.println("5");
-                           }
                         }
 
 

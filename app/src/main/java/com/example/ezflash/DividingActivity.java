@@ -43,29 +43,30 @@ public class DividingActivity extends AppCompatActivity {
             checkA(divideStuff, number);
             nextProblem();//dont touch
             checkbuttons(divideStuff);
-
         });
+
         answerB = (Button) findViewById(R.id.answerB);
         answerB.setOnClickListener(v -> {
+            checkB(divideStuff, number2);
             nextProblem();//dont touch
             checkbuttons(divideStuff);
-            checkB(divideStuff, number2);
         });
+
         answerC = (Button) findViewById(R.id.answerC);
         answerC.setOnClickListener(v -> {
+            checkC(divideStuff, number3);
             nextProblem();//dont touch
             checkbuttons(divideStuff);
-            checkC(divideStuff, number3);
         });
+
         answerD = (Button) findViewById(R.id.answerD);
         answerD.setOnClickListener(v -> {
+            checkD(divideStuff, number4);
             nextProblem();//dont touch
             checkbuttons(divideStuff);
-            checkD(divideStuff, number4);
         });
-        checkbuttons(divideStuff);
-        System.out.println(isCorrect);
 
+        checkbuttons(divideStuff);
     }
 
 
@@ -78,26 +79,31 @@ public class DividingActivity extends AppCompatActivity {
 
             Toast toast = Toast.makeText(this, isCorrect + " out of 10 correct, Great job!", Toast.LENGTH_LONG);//before activity finishes,toast message displays
             toast.show();
-            System.out.println(isCorrect);
             finish();
         }
     }
 
 
-    @SuppressLint("SetTextI18n")
-    public void checkbuttons(String[] divideStuff) {
+    public int value(String[] divideStuff) {
         try {
             String[] split = divideStuff[problemCount].split("/");
             int num1 = Integer.parseInt(split[0]);
             int num2 = Integer.parseInt(split[1]);
-            int quotient = num1 / num2;
+            return num1 / num2;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return 0;
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void checkbuttons(String[] divideStuff) {
 
             do {
                 number = random.nextInt((54) + 1);
                 number2 = random.nextInt((54) + 1);
                 number3 = random.nextInt((54) + 1);
                 number4 = random.nextInt((54) + 1);
-            } while (number != quotient && number2 != quotient && number3 != quotient && number4 != quotient);
+            } while (number != value(divideStuff) && number2 != value(divideStuff) && number3 != value(divideStuff) && number4 != value(divideStuff));
 
             if(number == number2 || number == number3 || number == number4) {
                 checkbuttons(divideStuff);
@@ -112,69 +118,28 @@ public class DividingActivity extends AppCompatActivity {
                 answerC.setText(Integer.toString(number3));
                 answerD.setText(Integer.toString(number4));
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-
-        }
-
-
     }
+
     public void checkA(String[] divideStuff, int number) {
-        try {
-            String[] split = divideStuff[problemCount].split("/");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int quotient = num1 / num2;
-
-            if (quotient == number)
+        if (value(divideStuff) == number)
                 isCorrect++;
-        } catch (ArrayIndexOutOfBoundsException e) {
-
-        }
     }
 
-    public void checkB(String[] multiplyStuff, int number2) {
-        try {
-            String[] split = multiplyStuff[problemCount].split("/");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int quotient = num1 / num2;
-
-            if (quotient == number2)
-                isCorrect++;
-        } catch (ArrayIndexOutOfBoundsException e) {
-
+        public void checkB(String[] divideStuff, int number2) {
+            if (value(divideStuff) == number2)
+                    isCorrect++;
         }
-    }
-    public void checkC(String[] multiplyStuff, int number3) {
-        try {
-            String[] split = multiplyStuff[problemCount].split("/");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int quotient = num1 / num2;
 
-            if (quotient == number3)
-                isCorrect++;
-        } catch (ArrayIndexOutOfBoundsException e) {
+            public void checkC(String[] divideStuff, int number3) {
+                if (value(divideStuff) == number3)
+                    isCorrect++;
 
-        }
-    }
-    public void checkD(String[] multiplyStuff, int number4) {
-        try {
-            String[] split = multiplyStuff[problemCount].split("/");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int quotient = num1 / num2;
+            }
+                public void checkD(String[] divideStuff, int number4) {
+                    if (value(divideStuff) == number4)
+                        isCorrect++;
 
-            if (quotient == number4)
-                isCorrect++;
-        } catch (ArrayIndexOutOfBoundsException e)  {
-
-        }
-    }
-
-
-
-
+                }
 
 
 }

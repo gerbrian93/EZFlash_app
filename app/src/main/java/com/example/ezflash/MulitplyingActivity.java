@@ -40,27 +40,31 @@ public class MulitplyingActivity extends AppCompatActivity {
 
         answerA = findViewById(R.id.answerA);
         answerA.setOnClickListener(v -> {
+            checkA(multiplyStuff, number);
             nextProblem();//dont touch
             checkbuttons(multiplyStuff);
-            checkA(multiplyStuff, number);
+
         });
         answerB = findViewById(R.id.answerB);
         answerB.setOnClickListener(v -> {
+            checkB(multiplyStuff, number2);
             nextProblem();//dont touch
             checkbuttons(multiplyStuff);
-            checkB(multiplyStuff, number2);
+
         });
         answerC = findViewById(R.id.answerC);
         answerC.setOnClickListener(v -> {
+            checkC(multiplyStuff, number3);
             nextProblem();//dont touch
             checkbuttons(multiplyStuff);
-            checkC(multiplyStuff, number3);
+
         });
         answerD = findViewById(R.id.answerD);
         answerD.setOnClickListener(v -> {
+            checkD(multiplyStuff, number4);
             nextProblem();//dont touch
             checkbuttons(multiplyStuff);
-            checkD(multiplyStuff, number4);
+
         });
         checkbuttons(multiplyStuff);
     }
@@ -72,28 +76,32 @@ public class MulitplyingActivity extends AppCompatActivity {
             showProblem.setText(multiplyStuff[problemCount]);
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            Toast toast = Toast.makeText(this, isCorrect + " out of 10 correct, Great job!", Toast.LENGTH_LONG);//before activity finishes,toast message displays
+            Toast toast = Toast.makeText(this, isCorrect + " out of 10 correct, Great job!", Toast.LENGTH_SHORT);//before activity finishes,toast message displaystoast.show();
             toast.show();
-            System.out.println(isCorrect);
             finish();
         }
     }
-
+public int value(String[] multiplyStuff) {
+   try {
+       String[] split = multiplyStuff[problemCount].split("x");
+       int num1 = Integer.parseInt(split[0]);
+       int num2 = Integer.parseInt(split[1]);
+       return num1 * num2;
+   } catch (ArrayIndexOutOfBoundsException e) {
+       return 0;
+   }
+}
 
     @SuppressLint("SetTextI18n")
-    public void checkbuttons(String[] addingStuff) {
-        try {
-            String[] split = addingStuff[problemCount].split("x");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int product = num1 * num2;
+    public void checkbuttons(String[] multiplyStuff) {
 
-            do {
+
+        do {
                 number = random.nextInt((81) + 1);
                 number2 = random.nextInt((81) + 1);
                 number3 = random.nextInt((81) + 1);
                 number4 = random.nextInt((81) + 1);
-            } while (number != product && number2 != product && number3 != product && number4 != product);
+            } while (number != value(multiplyStuff) && number2 != value(multiplyStuff) && number3 != value(multiplyStuff) && number4 != value(multiplyStuff));
 
             if(number == number2 || number == number3 || number == number4) {
                 checkbuttons(multiplyStuff);
@@ -108,65 +116,27 @@ public class MulitplyingActivity extends AppCompatActivity {
                 answerC.setText(Integer.toString(number3));
                 answerD.setText(Integer.toString(number4));
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-
-        }
 
 
     }
-    public void checkA(String[] multiplyStuff, int number) {
-        try {
-            String[] split = multiplyStuff[problemCount].split("x");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int product = num1 * num2;
-
-            if (product == number)
+    public void checkA(String[]multiplyStuff, int number) {
+            if (number == value(multiplyStuff))
                 isCorrect++;
-        } catch (ArrayIndexOutOfBoundsException e) {
-
-        }
     }
 
     public void checkB(String[] multiplyStuff, int number2) {
-        try {
-            String[] split = multiplyStuff[problemCount].split("x");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int product = num1 * num2;
-
-            if (product == number2)
+            if (number2 == value(multiplyStuff))
                 isCorrect++;
-        } catch (ArrayIndexOutOfBoundsException e) {
-
-        }
     }
     public void checkC(String[] multiplyStuff, int number3) {
-        try {
-            String[] split = multiplyStuff[problemCount].split("x");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int product = num1 * num2;
-
-            if (product == number3)
+            if (number3 == value(multiplyStuff))
                 isCorrect++;
-        } catch (ArrayIndexOutOfBoundsException e) {
-
-        }
     }
     public void checkD(String[] multiplyStuff, int number4) {
-        try {
-            String[] split = multiplyStuff[problemCount].split("x");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int product = num1 * num2;
-
-            if (product == number4)
+            if (number4 == value(multiplyStuff))
                 isCorrect++;
-        } catch (ArrayIndexOutOfBoundsException e)  {
+         }
 
-        }
-    }
 
 
 

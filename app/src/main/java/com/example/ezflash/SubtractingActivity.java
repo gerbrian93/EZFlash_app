@@ -38,39 +38,33 @@ public class SubtractingActivity extends AppCompatActivity {
 
         answerA = (Button) findViewById(R.id.answerA);
         answerA.setOnClickListener(v -> {
-            toast();
             checkA(subtractStuff, number);
             nextProblem();//dont touch
             checkbuttons(subtractStuff);
-
         });
+
         answerB = (Button) findViewById(R.id.answerB);
         answerB.setOnClickListener(v -> {
-            toast();
             checkB(subtractStuff, number2);
             nextProblem();//dont touch
             checkbuttons(subtractStuff);
-
         });
+
         answerC = (Button) findViewById(R.id.answerC);
         answerC.setOnClickListener(v -> {
-            toast();
             checkC(subtractStuff, number3);
             nextProblem();//dont touch
             checkbuttons(subtractStuff);
-
         });
+
         answerD = (Button) findViewById(R.id.answerD);
         answerD.setOnClickListener(v -> {
-            toast();
             checkD(subtractStuff, number4);
             nextProblem();//dont touch
             checkbuttons(subtractStuff);
-
         });
+
         checkbuttons(subtractStuff);
-
-
     }
 
 
@@ -81,29 +75,34 @@ public class SubtractingActivity extends AppCompatActivity {
 
         } catch (ArrayIndexOutOfBoundsException e) {
 
-
-            System.out.println(isCorrect);
+            Toast toast = Toast.makeText(this, isCorrect + " out of 10 correct, Great job!", Toast.LENGTH_SHORT);//before activity finishes,toast message displaystoast.show();
+            toast.show();
             finish();
         }
     }
 
-
-    @SuppressLint("SetTextI18n")
-    public void checkbuttons(String[] subtractStuff) {
+    public int value(String[] subtractStuff) {
         try {
             String[] split = subtractStuff[problemCount].split("-");
             int num1 = Integer.parseInt(split[0]);
             int num2 = Integer.parseInt(split[1]);
-            int diff = num1 - num2;
+            return num1 - num2;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return 0;
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void checkbuttons(String[] subtractStuff) {
 
             do {
                 number = random.nextInt((14) + 1);
                 number2 = random.nextInt((14) + 1);
                 number3 = random.nextInt((14) + 1);
                 number4 = random.nextInt((14) + 1);
-            } while (number != diff && number2 != diff && number3 != diff && number4 != diff);
+            } while (number != value(subtractStuff) && number2 != value(subtractStuff) && number3 != value(subtractStuff) && number4 != value(subtractStuff));
 
-            if(number == number2 || number == number3 || number == number4) {
+            if (number == number2 || number == number3 || number == number4) {
                 checkbuttons(subtractStuff);
             } else if (number2 == number3 || number2 == number4) {
                 checkbuttons(subtractStuff);
@@ -116,75 +115,27 @@ public class SubtractingActivity extends AppCompatActivity {
                 answerC.setText(Integer.toString(number3));
                 answerD.setText(Integer.toString(number4));
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
-
-        }
-
-
     }
+
     public void checkA(String[] subtractStuff, int number) {
-        try {
-            String[] split = subtractStuff[problemCount].split("-");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int total = num1 - num2;
-
-            if (total == number)
+        if (value(subtractStuff) == number)
                 isCorrect++;
-        } catch (ArrayIndexOutOfBoundsException e) {
-
-        }
     }
 
-    public void checkB(String[] subtractStuff, int number2) {
-        try {
-            String[] split = subtractStuff[problemCount].split("-");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int total = num1 + num2;
-
-            if (total == number2)
-                isCorrect++;
-        } catch (ArrayIndexOutOfBoundsException e) {
-
+        public void checkB(String[] subtractStuff, int number2) {
+            if (value(subtractStuff) == number2)
+                    isCorrect++;
         }
+
+            public void checkC(String[] subtractStuff, int number3) {
+                if (value(subtractStuff) == number3)
+                        isCorrect++;
+            }
+
+                public void checkD(String[] subtractStuff, int number4) {
+                    if (value(subtractStuff) == number4)
+                            isCorrect++;
+                }
+
+
     }
-    public void checkC(String[] subtractStuff, int number3) {
-        try {
-            String[] split = subtractStuff[problemCount].split("-");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int total = num1 + num2;
-
-            if (total == number3)
-                isCorrect++;
-        } catch (ArrayIndexOutOfBoundsException e) {
-
-        }
-    }
-    public void checkD(String[] subtractStuff, int number4) {
-        try {
-            String[] split = subtractStuff[problemCount].split("-");
-            int num1 = Integer.parseInt(split[0]);
-            int num2 = Integer.parseInt(split[1]);
-            int total = num1 + num2;
-
-            if (total == number4)
-                isCorrect++;
-        } catch (ArrayIndexOutOfBoundsException e)  {
-
-        }
-    }
-
-    public void toast() {
-        if (problemCount > 0) {
-            Toast toast = Toast.makeText(this, isCorrect + " out of 10 correct, Great job!", Toast.LENGTH_SHORT);//before activity finishes,toast message displays
-            toast.show();
-        }
-    }
-
-
-
-
-
-}
